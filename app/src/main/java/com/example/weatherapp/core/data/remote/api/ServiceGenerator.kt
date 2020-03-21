@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.core.data.local.sharedpref.UserPreference
+import com.example.weatherapp.core.presentation.common.AppConstants
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -19,12 +20,10 @@ class ServiceGenerator {
 
     @SuppressLint("LogNotTimber")
     fun <S> createService(
-        serviceClass: Class<S>,
-        userPreference: UserPreference
+        serviceClass: Class<S>
     ): S {
 
-        val baseURL = ""
-        val authToken = userPreference.getAccessToken()
+        val baseURL = AppConstants.WEATHER_BASE_URL
 
         val httpClient = OkHttpClient.Builder()
         val builder = Retrofit.Builder()
@@ -36,7 +35,6 @@ class ServiceGenerator {
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.HEADERS
-
             httpClient.addInterceptor(logging)
         }
 
@@ -48,24 +46,17 @@ class ServiceGenerator {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
-        val interceptor: Interceptor
-
-        authToken.let { Log.i("token", it) }
-
-        var response: Response?
-        interceptor = Interceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("Authorization", authToken.trim())
-                .addHeader("Content-Type", "application/json")
+        val parametersInterceptor = Interceptor { chain ->
+            val url = chain.request()
+                .url().newBuilder()
+                .addQueryParameter("appid", AppConstants.WEATHER_API_KEY)
+                .addQueryParameter("units", "metric")//For temperature in Celsius
                 .build()
-            response = chain.proceed(request)
-            response!!
+            val request = chain.request().newBuilder().url(url).build()
+            chain.proceed(request)
         }
 
-        if (!httpClient.interceptors().contains(interceptor)) {
-            httpClient.addInterceptor(interceptor)
-        }
-
+        httpClient.addInterceptor(parametersInterceptor)
 
         builder.client(httpClient.build())
         val retrofit = builder.build()

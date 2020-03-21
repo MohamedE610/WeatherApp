@@ -29,3 +29,29 @@ fun ImageView.loadFromUrl(
 
     glideApp.into(this)
 }
+
+
+fun ImageView.loadIconWeather(
+    icon: String?,
+    placeholder: Int? = null,
+    error: Int? = null,
+    listener: RequestListener<Drawable>? = null
+) {
+    val url = "http://openweathermap.org/img/w/${icon}.png"
+
+    val glideApp = GlideApp.with(context)
+        .load(url)
+
+    placeholder?.let {
+        glideApp.apply(RequestOptions().placeholder(it))
+    }
+    error?.let {
+        glideApp.apply(RequestOptions().error(it))
+    }
+
+    listener?.let {
+        glideApp.listener(it)
+    }
+
+    glideApp.into(this)
+}

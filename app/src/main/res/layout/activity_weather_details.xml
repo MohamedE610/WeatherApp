@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.presentation.view.activity.HomeActivity">
-
-    <FrameLayout
-        android:id="@+id/homeFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    tools:context=".weatherdetails.presentation.view.activity.WeatherDetailsActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
