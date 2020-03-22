@@ -1,10 +1,12 @@
 package com.example.weatherapp.home.data.repository
 
 import com.example.weatherapp.home.data.mapper.map
+import com.example.weatherapp.home.data.mapper.mapIntoEntity
 import com.example.weatherapp.home.data.source.local.LocalDataSource
 import com.example.weatherapp.home.data.source.remote.RemoteDataSource
 import com.example.weatherapp.home.domain.model.CityWeather
 import com.example.weatherapp.home.domain.repository.CityWeatherRepository
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -20,5 +22,11 @@ class CityWeatherRepositoryImpl @Inject constructor(
 
     override fun getAllCitiesWeatherFromDB(): Single<List<CityWeather>> =
         localDataSource.getAllCitiesWeather().map { list -> list.map { it.map() } }
+
+    override fun deleteCityWeather(cityId: String): Completable =
+        Completable.fromCallable { localDataSource.deleteCityWeather(cityId) }
+
+    override fun saveCityWeather(cityWeather: CityWeather): Completable =
+        Completable.fromCallable { localDataSource.saveCityWeather(cityWeather.mapIntoEntity()) }
 
 }

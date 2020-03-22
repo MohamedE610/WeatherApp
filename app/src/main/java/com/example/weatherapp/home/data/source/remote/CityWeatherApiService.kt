@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface CityWeatherApiService {
 
-    @GET("/forecast/daily")
+    @GET("forecast/daily")
     fun getCityWeatherByLatLong(
         @Query("lat") lat: Long,
         @Query("lon") lon: Long,
@@ -15,7 +15,7 @@ interface CityWeatherApiService {
     ): Single<CityWeatherResponse>
 
 
-    @GET("/forecast/daily")
+    @GET("forecast/daily")
     fun getCityWeatherByName(
         @Query("q") cityName: String,
         @Query("cnt") numOfDays: Int = 7

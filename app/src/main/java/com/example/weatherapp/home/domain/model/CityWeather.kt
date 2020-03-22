@@ -19,9 +19,9 @@ data class DayTemperature(
 )
 
 data class Temperature(
-    val day: Long,
-    val min: Long,
-    val max: Long
+    val day: Double,
+    val min: Double,
+    val max: Double
 )
 
 data class Weather(

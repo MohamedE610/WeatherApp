@@ -22,9 +22,9 @@ data class DayTemperatureModel(
 )
 
 data class TemperatureModel(
-    @SerializedName("day") val day: Long,
-    @SerializedName("min") val min: Long,
-    @SerializedName("max") val max: Long
+    @SerializedName("day") val day: Double,
+    @SerializedName("min") val min: Double,
+    @SerializedName("max") val max: Double
 )
 
 data class WeatherModel(

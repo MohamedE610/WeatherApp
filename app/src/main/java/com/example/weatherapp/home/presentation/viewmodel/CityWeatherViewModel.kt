@@ -1,10 +1,9 @@
 package com.example.weatherapp.home.presentation.viewmodel
 
+import android.util.Log
 import com.example.weatherapp.core.presentation.modelwrapper.ObservableResource
 import com.example.weatherapp.core.presentation.viewmodel.BaseViewModel
-import com.example.weatherapp.home.domain.interactor.GetAllCitiesWeatherFromDBUseCase
-import com.example.weatherapp.home.domain.interactor.GetCityWeatherByCityNameUseCase
-import com.example.weatherapp.home.domain.interactor.GetCityWeatherByLatLongUseCase
+import com.example.weatherapp.home.domain.interactor.*
 import com.example.weatherapp.home.domain.model.CityWeather
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +14,9 @@ import javax.inject.Inject
 class CityWeatherViewModel @Inject constructor(
     private val getAllCitiesWeatherFromDBUseCase: GetAllCitiesWeatherFromDBUseCase,
     private val getCityWeatherByCityNameUseCase: GetCityWeatherByCityNameUseCase,
-    private val getCityWeatherByLatLongUseCase: GetCityWeatherByLatLongUseCase
+    private val getCityWeatherByLatLongUseCase: GetCityWeatherByLatLongUseCase,
+    private val deleteCityWeatherUseCase: DeleteCityWeatherUseCase,
+    private val saveCityWeatherUseCase: SaveCityWeatherUseCase
 ) : BaseViewModel() {
 
     val localCitiesWeatherLiveData by lazy {
@@ -69,6 +70,28 @@ class CityWeatherViewModel @Inject constructor(
                 cityWeatherByLatLonLiveData.value = it
             }, {
                 cityWeatherByLatLonLiveData.error.value = it
+            })
+    }
+
+    fun deleteCityWeather(cityId: String) {
+        val disposable = deleteCityWeatherUseCase.execute(cityId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d("deleteCityWeather", "success")
+            }, {
+                Log.d("deleteCityWeather", "failed")
+            })
+    }
+
+    fun saveCityWeather(cityWeather: CityWeather) {
+        val disposable = saveCityWeatherUseCase.execute(cityWeather)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d("saveCityWeather", "success")
+            }, {
+                Log.d("saveCityWeather", "failed")
             })
     }
 }

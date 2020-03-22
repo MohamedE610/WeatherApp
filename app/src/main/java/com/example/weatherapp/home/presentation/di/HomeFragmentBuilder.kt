@@ -6,6 +6,6 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class HomeFragmentBuilder {
-    @ContributesAndroidInjector(modules = [])
+    @ContributesAndroidInjector(modules = [CityWeatherModule::class])
     abstract fun bindHomeFragment(): HomeFragment
 }

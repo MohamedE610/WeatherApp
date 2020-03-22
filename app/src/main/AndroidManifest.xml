@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.weatherapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,8 +14,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".weatherdetails.presentation.view.activity.WeatherDetailsActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <service
+            android:name="com.example.weatherapp.service.UpdateForecastService"
+            android:enabled="true"
+            android:exported="false"></service>
+
+        <activity android:name=".weatherdetails.presentation.view.activity.WeatherDetailsActivity" />
         <activity android:name=".home.presentation.view.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

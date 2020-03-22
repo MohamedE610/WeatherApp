@@ -8,4 +8,6 @@ interface CityWeatherRepository {
     fun getCityWeatherByLatLong(lat: Long, long: Long): Single<CityWeather>
     fun getCityWeatherByCityName(cityName: String): Single<CityWeather>
     fun getAllCitiesWeatherFromDB(): Single<List<CityWeather>>
+    fun deleteCityWeather(cityId: String): Completable
+    fun saveCityWeather(cityWeather: CityWeather): Completable
 }
