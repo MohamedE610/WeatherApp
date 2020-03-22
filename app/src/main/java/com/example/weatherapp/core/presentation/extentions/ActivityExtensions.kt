@@ -33,3 +33,7 @@ fun Activity.showToastGeneralError() {
     showToast("Oops, Something went wrong ")
 }
 
+fun Activity.showToastNetworkError() {
+    showToast("No internet connection")
+}
+

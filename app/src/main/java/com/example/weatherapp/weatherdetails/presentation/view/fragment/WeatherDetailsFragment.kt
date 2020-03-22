@@ -7,15 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.weatherapp.R
-import com.example.weatherapp.core.presentation.extentions.setVisible
-import com.example.weatherapp.core.presentation.extentions.showToast
-import com.example.weatherapp.core.presentation.extentions.showToastGeneralError
+import com.example.weatherapp.core.presentation.extentions.*
 import com.example.weatherapp.core.presentation.viewmodel.ViewModelFactory
 import com.example.weatherapp.home.domain.model.CityWeather
 import com.example.weatherapp.home.presentation.viewmodel.CityWeatherViewModel
@@ -126,7 +123,13 @@ class WeatherDetailsFragment : Fragment(), WeatherDetailsActivity.OnActivityBack
         cityWeatherViewModel.cityWeatherByNameLiveData.observe(this,
             successObserver = Observer { displayDaysForecast(it) },
             loadingObserver = Observer { showLoading(it) },
-            commonErrorObserver = Observer { activity?.showToastGeneralError() })
+            commonErrorObserver = Observer {
+                val isInternetAvailable = activity?.isInternetAvailable() ?: false
+                if (isInternetAvailable)
+                    activity?.showToastGeneralError()
+                else
+                    activity?.showToastNetworkError()
+            })
     }
 
     private fun displayDaysForecast(it: CityWeather?) {

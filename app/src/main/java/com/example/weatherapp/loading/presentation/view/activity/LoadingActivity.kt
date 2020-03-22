@@ -13,6 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
+import com.example.weatherapp.core.presentation.extentions.isInternetAvailable
+import com.example.weatherapp.core.presentation.extentions.showToastGeneralError
+import com.example.weatherapp.core.presentation.extentions.showToastNetworkError
 import com.example.weatherapp.core.presentation.viewmodel.ViewModelFactory
 import com.example.weatherapp.home.presentation.view.activity.HomeActivity
 import com.example.weatherapp.home.presentation.viewmodel.CityWeatherViewModel
@@ -47,7 +50,11 @@ class LoadingActivity : AppCompatActivity() {
                 navigateToHomeActivity()
             },
             loadingObserver = Observer { },
-            commonErrorObserver = Observer { navigateToHomeActivity() })
+            commonErrorObserver = Observer {
+                if (!isInternetAvailable())
+                    showToastNetworkError()
+                navigateToHomeActivity()
+            })
 
         cityWeatherViewModel.cityWeatherByNameLiveData.observe(this,
             successObserver = Observer {
@@ -56,7 +63,11 @@ class LoadingActivity : AppCompatActivity() {
                 navigateToHomeActivity()
             },
             loadingObserver = Observer { },
-            commonErrorObserver = Observer { navigateToHomeActivity() })
+            commonErrorObserver = Observer {
+                if (!isInternetAvailable())
+                    showToastNetworkError()
+                navigateToHomeActivity()
+            })
     }
 
     private fun navigateToHomeActivity() {
