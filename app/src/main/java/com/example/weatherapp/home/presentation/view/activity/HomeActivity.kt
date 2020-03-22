@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.weatherapp.R
 import com.example.weatherapp.core.presentation.extentions.addFragment
+import com.example.weatherapp.core.presentation.extentions.replaceFragment
 import com.example.weatherapp.service.UpdateForecastService
 import com.example.weatherapp.home.presentation.view.fragment.HomeFragment
 import com.example.weatherapp.weatherdetails.presentation.view.fragment.WeatherDetailsFragment
@@ -22,7 +23,7 @@ class HomeActivity : DaggerAppCompatActivity() {
     private fun addHomeFragment() {
         val fragment = HomeFragment()
         val containerId = R.id.homeFragmentContainer
-        addFragment(fragment, containerId)
+        replaceFragment(fragment, containerId)
     }
 
     private fun startUpdateForecastService() {

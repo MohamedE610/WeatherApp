@@ -11,13 +11,13 @@ interface CityWeatherApiService {
     fun getCityWeatherByLatLong(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("cnt") numOfDays: Int = 7
+        @Query("cnt") numOfDays: Int = 5
     ): Single<CityWeatherResponse>
 
 
     @GET("forecast/daily")
     fun getCityWeatherByName(
         @Query("q") cityName: String,
-        @Query("cnt") numOfDays: Int = 7
+        @Query("cnt") numOfDays: Int = 5
     ): Single<CityWeatherResponse>
 }

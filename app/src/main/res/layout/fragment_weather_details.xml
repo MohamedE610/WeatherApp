@@ -9,6 +9,7 @@
     <include
         android:id="@+id/loadingDetailsSkeleton"
         layout="@layout/layout_home_skeleton"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp" />
