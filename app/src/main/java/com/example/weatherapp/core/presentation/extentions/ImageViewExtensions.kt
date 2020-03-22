@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.example.weatherapp.core.presentation.common.AppConstants
 import com.example.weatherapp.core.presentation.di.module.GlideApp
 
 
@@ -37,7 +38,7 @@ fun ImageView.loadIconWeather(
     error: Int? = null,
     listener: RequestListener<Drawable>? = null
 ) {
-    val url = "http://openweathermap.org/img/w/${icon}.png"
+    val url = "${AppConstants.WEATHER_MEDIA_URL}${icon}${AppConstants.WEATHER_MEDIA_EXTENSION}"
 
     val glideApp = GlideApp.with(context)
         .load(url)

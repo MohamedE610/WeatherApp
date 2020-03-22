@@ -60,6 +60,22 @@ class WeatherDetailsFragment : Fragment(), WeatherDetailsActivity.OnActivityBack
         loadArgs()
     }
 
+    private fun initViews() {
+        initDaysForecastRecyclerView()
+        fabSaveCityWeather.setOnClickListener {
+            cityWeather?.let {
+                saveCityWeatherIntoDB()
+            }
+        }
+    }
+
+    private fun initDaysForecastRecyclerView() {
+        rvDaysForecast.layoutManager =
+            LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
+        daysForecastAdapter = DayForecastAdapter()
+        rvDaysForecast.adapter = daysForecastAdapter
+    }
+
     private fun initObservers() {
         observeOnCityWeather()
         observeOnSaveCityWeatherSuccessfully()
@@ -90,35 +106,6 @@ class WeatherDetailsFragment : Fragment(), WeatherDetailsActivity.OnActivityBack
             })
     }
 
-    private fun initViews() {
-        initDaysForecastRecyclerView()
-        fabSaveCityWeather.setOnClickListener {
-            cityWeather?.let {
-                saveCityWeatherIntoDB()
-            }
-        }
-    }
-
-    // check if count of cities less than 5 to save otherwise ignore
-    private fun saveCityWeatherIntoDB() {
-        cityWeatherViewModel.getSavedCitiesCount()
-    }
-
-    private fun loadArgs() {
-        arguments?.let {
-            val cityWeather = it.getParcelable<CityWeather>(WeatherDetailsActivity.CITY)
-            if (cityWeather != null) {
-                this.cityWeather = cityWeather
-                fabSaveCityWeather.setVisible(true)
-                displayDaysForecast(cityWeather)
-                return
-            }
-
-            val cityName = it.getString(WeatherDetailsActivity.CITY_NAME, "")
-            cityWeatherViewModel.getCityWeatherByName(cityName)
-        }
-    }
-
     private fun observeOnCityWeather() {
         cityWeatherViewModel.cityWeatherByNameLiveData.observe(this,
             successObserver = Observer { displayDaysForecast(it) },
@@ -147,11 +134,24 @@ class WeatherDetailsFragment : Fragment(), WeatherDetailsActivity.OnActivityBack
         }
     }
 
-    private fun initDaysForecastRecyclerView() {
-        rvDaysForecast.layoutManager =
-            LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
-        daysForecastAdapter = DayForecastAdapter()
-        rvDaysForecast.adapter = daysForecastAdapter
+    // check if count of cities less than 5 to save otherwise ignore
+    private fun saveCityWeatherIntoDB() {
+        cityWeatherViewModel.getSavedCitiesCount()
+    }
+
+    private fun loadArgs() {
+        arguments?.let {
+            val cityWeather = it.getParcelable<CityWeather>(WeatherDetailsActivity.CITY)
+            if (cityWeather != null) {
+                this.cityWeather = cityWeather
+                fabSaveCityWeather.setVisible(true)
+                displayDaysForecast(cityWeather)
+                return
+            }
+
+            val cityName = it.getString(WeatherDetailsActivity.CITY_NAME, "")
+            cityWeatherViewModel.getCityWeatherByName(cityName)
+        }
     }
 
     override fun onActivityBackPressed() {

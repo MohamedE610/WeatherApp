@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/gradient_sea_weed"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/tvWidgetCityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/appwidget_text"
+        android:text="London"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
+        android:textStyle="bold|italic" />
+
+    <ImageView
+        android:id="@+id/imgWidgetForecast"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_weather_widget"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp" />
+
+    <LinearLayout
+        android:id="@+id/llTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgWidgetForecast"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_toStartOf="@+id/imgWidgetForecast">
+
+        <TextView
+            android:id="@+id/tvWidgetTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/tvTemperatureMark"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:text="o"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvWidgetWeatherStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgWidgetForecast"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignStart="@+id/llTemp"
+        android:text="Clear"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
+
+</RelativeLayout>

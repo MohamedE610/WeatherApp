@@ -72,6 +72,33 @@ class HomeFragment : Fragment() {
         observeOnItemClicked()
     }
 
+    private fun getCitiesNames(): List<String> {
+        val citiesNames = HashSet<String>()
+        val type = object : TypeToken<Map<String, List<String>>>() {
+        }.type
+        val fileContent = getFileContent()
+        val countryCitiesHashMap = Gson().fromJson<Map<String, List<String>>>(fileContent, type)
+        for (country in countryCitiesHashMap) {
+            citiesNames.addAll(country.value)
+        }
+        return citiesNames.toList()
+    }
+
+    private fun getFileContent(): String {
+        val inputStream: InputStream = resources.openRawResource(R.raw.countries_to_cities)
+        val writer: Writer = StringWriter()
+        val buffer = CharArray(1024)
+        inputStream.use { inStream ->
+            val reader: Reader = BufferedReader(InputStreamReader(inStream, "UTF-8"))
+            var n: Int
+            while (reader.read(buffer).also { n = it } != -1) {
+                writer.write(buffer, 0, n)
+            }
+        }
+
+        return writer.toString()
+    }
+
     private fun observeOnItemClicked() {
         acSearch?.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, _, _ ->
@@ -100,33 +127,6 @@ class HomeFragment : Fragment() {
     private fun navigateToWeatherDetailsActivity(selectedCity: CityWeather) {
         val intent = WeatherDetailsActivity.getIntent(context!!, selectedCity)
         startActivityForResult(intent, ADD_CITY_WEATHER_TO_DB)
-    }
-
-    private fun getCitiesNames(): List<String> {
-        val citiesNames = HashSet<String>()
-        val type = object : TypeToken<Map<String, List<String>>>() {
-        }.type
-        val fileContent = getFileContent()
-        val countryCitiesHashMap = Gson().fromJson<Map<String, List<String>>>(fileContent, type)
-        for (country in countryCitiesHashMap) {
-            citiesNames.addAll(country.value)
-        }
-        return citiesNames.toList()
-    }
-
-    private fun getFileContent(): String {
-        val inputStream: InputStream = resources.openRawResource(R.raw.countries_to_cities)
-        val writer: Writer = StringWriter()
-        val buffer = CharArray(1024)
-        inputStream.use { inStream ->
-            val reader: Reader = BufferedReader(InputStreamReader(inStream, "UTF-8"))
-            var n: Int
-            while (reader.read(buffer).also { n = it } != -1) {
-                writer.write(buffer, 0, n)
-            }
-        }
-
-        return writer.toString()
     }
 
     private fun initCityRecyclerView() {

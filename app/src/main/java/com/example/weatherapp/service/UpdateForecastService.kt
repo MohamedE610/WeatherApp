@@ -40,10 +40,6 @@ class UpdateForecastService : Service() {
             })
     }
 
-    override fun onBind(p0: Intent?): IBinder? {
-        return null
-    }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         updateLocalCitiesForecast()
         return START_STICKY
@@ -51,6 +47,10 @@ class UpdateForecastService : Service() {
 
     private fun updateLocalCitiesForecast() {
         cityWeatherViewModel.getAllCitiesWeatherFromDB()
+    }
+
+    override fun onBind(p0: Intent?): IBinder? {
+        return null
     }
 
     override fun onDestroy() {
