@@ -42,6 +42,7 @@ class LoadingActivity : AppCompatActivity() {
     private fun observeOnCityWeather() {
         cityWeatherViewModel.cityWeatherByLatLonLiveData.observe(this,
             successObserver = Observer {
+                cityWeatherViewModel.saveDefaultCityId(it.city.id)
                 cityWeatherViewModel.saveCityWeather(it)
                 navigateToHomeActivity()
             },
@@ -50,6 +51,7 @@ class LoadingActivity : AppCompatActivity() {
 
         cityWeatherViewModel.cityWeatherByNameLiveData.observe(this,
             successObserver = Observer {
+                cityWeatherViewModel.saveDefaultCityId(it.city.id)
                 cityWeatherViewModel.saveCityWeather(it)
                 navigateToHomeActivity()
             },
@@ -59,9 +61,9 @@ class LoadingActivity : AppCompatActivity() {
 
     private fun navigateToHomeActivity() {
         Handler().postDelayed({
-            startActivity(Intent(this, HomeActivity::class.java))
             finish()
-        }, 500)
+            startActivity(Intent(this, HomeActivity::class.java))
+        }, 1000)
     }
 
     private fun getCurrentLocation() {

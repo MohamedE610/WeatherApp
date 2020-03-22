@@ -29,4 +29,11 @@ class CityWeatherRepositoryImpl @Inject constructor(
     override fun saveCityWeather(cityWeather: CityWeather): Completable =
         localDataSource.saveCityWeather(cityWeather.mapIntoEntity())
 
+    override fun saveDefaultCityId(cityId: String) {
+        localDataSource.saveDefaultCityId(cityId)
+    }
+
+    override fun getDefaultCityId(): String = localDataSource.getDefaultCityId()
+    override fun getCitiesWeatherCount(): Single<Int> = localDataSource.getCitiesWeatherCount()
+
 }

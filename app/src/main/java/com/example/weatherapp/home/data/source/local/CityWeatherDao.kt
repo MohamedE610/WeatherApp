@@ -12,6 +12,9 @@ interface CityWeatherDao {
     @Query("select * from CityWeather")
     fun getAllCitiesWeather(): List<CityWeatherEntity>
 
+    @Query("select count(*) from CityWeather")
+    fun getCitiesWeatherCount():Int
+
     @Query("delete from  CityWeather where id = :cityId")
     fun deleteCityWeather(cityId: String)
 }

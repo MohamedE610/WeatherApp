@@ -2,6 +2,7 @@ package com.example.weatherapp.home.presentation.viewmodel
 
 import android.util.Log
 import com.example.weatherapp.core.presentation.modelwrapper.ObservableResource
+import com.example.weatherapp.core.presentation.modelwrapper.SingleLiveEvent
 import com.example.weatherapp.core.presentation.viewmodel.BaseViewModel
 import com.example.weatherapp.home.domain.interactor.*
 import com.example.weatherapp.home.domain.model.CityWeather
@@ -16,20 +17,16 @@ class CityWeatherViewModel @Inject constructor(
     private val getCityWeatherByCityNameUseCase: GetCityWeatherByCityNameUseCase,
     private val getCityWeatherByLatLongUseCase: GetCityWeatherByLatLongUseCase,
     private val deleteCityWeatherUseCase: DeleteCityWeatherUseCase,
-    private val saveCityWeatherUseCase: SaveCityWeatherUseCase
+    private val saveCityWeatherUseCase: SaveCityWeatherUseCase,
+    private val defaultCityIdUseCase: DefaultCityIdUseCase,
+    private val getSavedCitiesCountUseCase: GetSavedCitiesCountUseCase
 ) : BaseViewModel() {
 
-    val localCitiesWeatherLiveData by lazy {
-        ObservableResource<List<CityWeather>>()
-    }
-
-    val cityWeatherByLatLonLiveData by lazy {
-        ObservableResource<CityWeather>()
-    }
-
-    val cityWeatherByNameLiveData by lazy {
-        ObservableResource<CityWeather>()
-    }
+    val savedCitiesCountLiveEvent by lazy { SingleLiveEvent<Int>() }
+    val saveCityWeatherSuccessfully by lazy { SingleLiveEvent<Boolean>() }
+    val localCitiesWeatherLiveData by lazy { ObservableResource<List<CityWeather>>() }
+    val cityWeatherByLatLonLiveData by lazy { ObservableResource<CityWeather>() }
+    val cityWeatherByNameLiveData by lazy { ObservableResource<CityWeather>() }
 
     fun getAllCitiesWeatherFromDB() {
         val disposable = getAllCitiesWeatherFromDBUseCase.execute()
@@ -91,10 +88,27 @@ class CityWeatherViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                saveCityWeatherSuccessfully.value = true
                 Log.d("saveCityWeather", "success")
             }, {
+                saveCityWeatherSuccessfully.value = false
                 Log.d("saveCityWeather", "failed")
             })
         addDisposable(disposable)
+    }
+
+    fun getDefaultCityId() = defaultCityIdUseCase.getDefaultCityId()
+
+    fun saveDefaultCityId(cityId: String) = defaultCityIdUseCase.saveDefaultCityId(cityId)
+
+    fun getSavedCitiesCount() {
+        val disposable = getSavedCitiesCountUseCase.execute()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                savedCitiesCountLiveEvent.value = it
+            }, {
+                savedCitiesCountLiveEvent.value = -1001
+            })
     }
 }

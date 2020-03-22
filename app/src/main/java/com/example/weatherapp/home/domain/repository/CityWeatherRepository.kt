@@ -10,4 +10,7 @@ interface CityWeatherRepository {
     fun getAllCitiesWeatherFromDB(): Single<List<CityWeather>>
     fun deleteCityWeather(cityId: String): Completable
     fun saveCityWeather(cityWeather: CityWeather): Completable
+    fun saveDefaultCityId(cityId:String)
+    fun getDefaultCityId():String
+    fun getCitiesWeatherCount():Single<Int>
 }

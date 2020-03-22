@@ -26,10 +26,17 @@ class UpdateForecastService : Service() {
             Observer {
                 if (it.isNullOrEmpty())
                     return@Observer
-                for (city in it)
-                    cityWeatherViewModel.saveCityWeather(city)
+                for (cityWeather in it)
+                    cityWeatherViewModel.getCityWeatherByName(cityWeather.city.name)
 
                 Log.d("UpdateForecastService", "data Updated")
+            })
+
+        cityWeatherViewModel.cityWeatherByNameLiveData.observeForever(
+            Observer {
+                it?.let { cityWeather ->
+                    cityWeatherViewModel.saveCityWeather(cityWeather)
+                }
             })
     }
 

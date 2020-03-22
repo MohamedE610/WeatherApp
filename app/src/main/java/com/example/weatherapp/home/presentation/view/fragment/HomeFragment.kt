@@ -1,5 +1,7 @@
 package com.example.weatherapp.home.presentation.view.fragment
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import com.example.weatherapp.home.domain.model.CityWeather
 import com.example.weatherapp.home.presentation.view.adapter.CityAdapter
 import com.example.weatherapp.home.presentation.viewmodel.CityWeatherViewModel
 import com.example.weatherapp.weatherdetails.presentation.view.activity.WeatherDetailsActivity
+import com.example.weatherapp.weatherdetails.presentation.view.activity.WeatherDetailsActivity.Companion.CITY
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.android.support.AndroidSupportInjection
@@ -91,7 +94,12 @@ class HomeFragment : Fragment() {
 
     private fun navigateToWeatherDetailsActivity(selectedCity: String) {
         val intent = WeatherDetailsActivity.getIntent(context!!, selectedCity)
-        startActivity(intent)
+        startActivityForResult(intent, ADD_CITY_WEATHER_TO_DB)
+    }
+
+    private fun navigateToWeatherDetailsActivity(selectedCity: CityWeather) {
+        val intent = WeatherDetailsActivity.getIntent(context!!, selectedCity)
+        startActivityForResult(intent, ADD_CITY_WEATHER_TO_DB)
     }
 
     private fun getCitiesNames(): List<String> {
@@ -126,6 +134,16 @@ class HomeFragment : Fragment() {
         rvCities?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rvCities.adapter = cityAdapter
         observeOnRemoveIconClicked()
+        observeOnCityClicked()
+    }
+
+    private fun observeOnCityClicked() {
+        cityAdapter.onItemClickedLiveEvent.observe(viewLifecycleOwner,
+            Observer {
+                it?.let { cityName ->
+                    navigateToWeatherDetailsActivity(cityName)
+                }
+            })
     }
 
     private fun observeOnRemoveIconClicked() {
@@ -161,13 +179,39 @@ class HomeFragment : Fragment() {
             activity?.showToastGeneralError()
             return
         }
-
+        // reorder cities to make default city in the top
+        val orderedList = reorderCityList(it)
         cityAdapter.data.clear()
-        cityAdapter.data.addAll(it)
+        cityAdapter.data.addAll(orderedList)
+    }
 
+    private fun reorderCityList(it: List<CityWeather>): List<CityWeather> {
+        val defaultCityId = cityWeatherViewModel.getDefaultCityId()
+        val orderedList: ArrayList<CityWeather> = arrayListOf()
+        for (cityWeather in it)
+            if (defaultCityId == cityWeather.city.id)
+                orderedList.add(0, cityWeather)
+            else
+                orderedList.add(cityWeather)
+        return orderedList
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            ADD_CITY_WEATHER_TO_DB -> {
+                if (resultCode == RESULT_OK) {
+                    data?.let {
+                        // reload to add new cities
+                        cityWeatherViewModel.getAllCitiesWeatherFromDB()
+                    }
+                }
+            }
+        }
     }
 
     companion object {
+        const val ADD_CITY_WEATHER_TO_DB = 1002
         @JvmStatic
         fun newInstance() = HomeFragment()
     }

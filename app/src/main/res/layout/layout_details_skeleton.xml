@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:Skeleton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <io.rmiri.skeleton.SkeletonViewGroup
+        android:id="@+id/skeletonGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        Skeleton:SK_BackgroundViewsColor="#EEEEEE"
+        Skeleton:SK_animationAutoStart="true"
+        Skeleton:SK_animationDirection="LTR"
+        Skeleton:SK_animationDuration="1000"
+        Skeleton:SK_animationFinishType="none"
+        Skeleton:SK_animationNormalType="gradient"
+        Skeleton:SK_backgroundMainColor="@android:color/transparent"
+        Skeleton:SK_highLightColor="#DEDEDE"
+        Skeleton:layout_constraintStart_toStartOf="parent"
+        Skeleton:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <io.rmiri.skeleton.SkeletonView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                Skeleton:SK_cornerRadius="8dp"
+                Skeleton:SK_padding="0dp"
+                Skeleton:SK_shapeType="rect"
+                Skeleton:layout_constraintStart_toStartOf="parent"
+                Skeleton:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    Skeleton:layout_constraintStart_toStartOf="parent"
+                    Skeleton:layout_constraintTop_toTopOf="parent" />
+
+
+            </io.rmiri.skeleton.SkeletonView>
+
+            <io.rmiri.skeleton.SkeletonView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                Skeleton:SK_cornerRadius="8dp"
+                Skeleton:SK_padding="0dp"
+                Skeleton:SK_shapeType="rect"
+                Skeleton:layout_constraintStart_toStartOf="parent"
+                Skeleton:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    Skeleton:layout_constraintStart_toStartOf="parent"
+                    Skeleton:layout_constraintTop_toTopOf="parent" />
+
+
+            </io.rmiri.skeleton.SkeletonView>
+
+            <io.rmiri.skeleton.SkeletonView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                Skeleton:SK_cornerRadius="8dp"
+                Skeleton:SK_padding="0dp"
+                Skeleton:SK_shapeType="rect"
+                Skeleton:layout_constraintStart_toStartOf="parent"
+                Skeleton:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    Skeleton:layout_constraintStart_toStartOf="parent"
+                    Skeleton:layout_constraintTop_toTopOf="parent" />
+
+
+            </io.rmiri.skeleton.SkeletonView>
+
+            <io.rmiri.skeleton.SkeletonView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                Skeleton:SK_cornerRadius="8dp"
+                Skeleton:SK_padding="0dp"
+                Skeleton:SK_shapeType="rect"
+                Skeleton:layout_constraintStart_toStartOf="parent"
+                Skeleton:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    Skeleton:layout_constraintStart_toStartOf="parent"
+                    Skeleton:layout_constraintTop_toTopOf="parent" />
+
+
+            </io.rmiri.skeleton.SkeletonView>
+
+            <io.rmiri.skeleton.SkeletonView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                Skeleton:SK_cornerRadius="8dp"
+                Skeleton:SK_padding="0dp"
+                Skeleton:SK_shapeType="rect"
+                Skeleton:layout_constraintStart_toStartOf="parent"
+                Skeleton:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    Skeleton:layout_constraintStart_toStartOf="parent"
+                    Skeleton:layout_constraintTop_toTopOf="parent" />
+
+            </io.rmiri.skeleton.SkeletonView>
+
+            <io.rmiri.skeleton.SkeletonView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                Skeleton:SK_cornerRadius="8dp"
+                Skeleton:SK_padding="0dp"
+                Skeleton:SK_shapeType="rect"
+                Skeleton:layout_constraintStart_toStartOf="parent"
+                Skeleton:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    Skeleton:layout_constraintStart_toStartOf="parent"
+                    Skeleton:layout_constraintTop_toTopOf="parent" />
+
+            </io.rmiri.skeleton.SkeletonView>
+
+            <io.rmiri.skeleton.SkeletonView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                Skeleton:SK_cornerRadius="8dp"
+                Skeleton:SK_padding="0dp"
+                Skeleton:SK_shapeType="rect"
+                Skeleton:layout_constraintStart_toStartOf="parent"
+                Skeleton:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEE"
+                    Skeleton:layout_constraintStart_toStartOf="parent"
+                    Skeleton:layout_constraintTop_toTopOf="parent" />
+
+            </io.rmiri.skeleton.SkeletonView>
+
+        </LinearLayout>
+
+    </io.rmiri.skeleton.SkeletonViewGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

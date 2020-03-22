@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.item_city_weather.view.*
 
 class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
     val onRemoveIconClickedLiveEvent = SingleLiveEvent<CityWeather>()
+    val onItemClickedLiveEvent = SingleLiveEvent<CityWeather>()
 
     val backgroundList = intArrayOf(
         R.drawable.gradient_harmonic_energy,
@@ -44,6 +45,7 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
             itemView.imgRemoveCity.setOnClickListener {
                 onRemoveIconClickedLiveEvent.value = item
             }
+            itemView.setOnClickListener { onItemClickedLiveEvent.value = item }
         }
     }
 }

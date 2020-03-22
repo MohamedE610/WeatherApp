@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".weatherdetails.presentation.view.activity.WeatherDetailsActivity">
 
+    <FrameLayout
+        android:id="@+id/weatherDetailsFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
