@@ -13,7 +13,19 @@
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="8dp"
         android:hint="@string/all_lbl_search"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        />
+
+    <include
+        android:id="@+id/loadingHomeSkeleton"
+        layout="@layout/layout_home_skeleton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acSearch" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCities"

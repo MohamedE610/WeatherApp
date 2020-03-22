@@ -60,7 +60,7 @@ class CityWeatherViewModel @Inject constructor(
         addDisposable(disposable)
     }
 
-    fun getCityWeatherByLatLon(lat: Long, lon: Long) {
+    fun getCityWeatherByLatLon(lat: Double, lon: Double) {
         val disposable = getCityWeatherByLatLongUseCase.execute(lat, lon)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -71,6 +71,7 @@ class CityWeatherViewModel @Inject constructor(
             }, {
                 cityWeatherByLatLonLiveData.error.value = it
             })
+        addDisposable(disposable)
     }
 
     fun deleteCityWeather(cityId: String) {
@@ -82,6 +83,7 @@ class CityWeatherViewModel @Inject constructor(
             }, {
                 Log.d("deleteCityWeather", "failed")
             })
+        addDisposable(disposable)
     }
 
     fun saveCityWeather(cityWeather: CityWeather) {
@@ -93,5 +95,6 @@ class CityWeatherViewModel @Inject constructor(
             }, {
                 Log.d("saveCityWeather", "failed")
             })
+        addDisposable(disposable)
     }
 }

@@ -14,7 +14,7 @@ class CityWeatherRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : CityWeatherRepository {
-    override fun getCityWeatherByLatLong(lat: Long, long: Long): Single<CityWeather> =
+    override fun getCityWeatherByLatLong(lat: Double, long: Double): Single<CityWeather> =
         remoteDataSource.getCityWeatherByLatLon(lat, long).map { it.map() }
 
     override fun getCityWeatherByCityName(cityName: String): Single<CityWeather> =
@@ -24,9 +24,9 @@ class CityWeatherRepositoryImpl @Inject constructor(
         localDataSource.getAllCitiesWeather().map { list -> list.map { it.map() } }
 
     override fun deleteCityWeather(cityId: String): Completable =
-        Completable.fromCallable { localDataSource.deleteCityWeather(cityId) }
+        localDataSource.deleteCityWeather(cityId)
 
     override fun saveCityWeather(cityWeather: CityWeather): Completable =
-        Completable.fromCallable { localDataSource.saveCityWeather(cityWeather.mapIntoEntity()) }
+        localDataSource.saveCityWeather(cityWeather.mapIntoEntity())
 
 }

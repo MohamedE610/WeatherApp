@@ -40,11 +40,11 @@ class DBConverters {
     }
 
     @TypeConverter
-    fun convertCityToString(list: List<DayTemperatureModel>?): String? {
+    fun convertDayTemperatureListToString(list: List<DayTemperatureModel>?): String? {
         if (list == null) {
             return null
         }
-        val type = object : TypeToken<DayTemperatureModel>() {
+        val type = object : TypeToken<List<DayTemperatureModel>>() {
         }.type
         return Gson().toJson(list, type)
     }

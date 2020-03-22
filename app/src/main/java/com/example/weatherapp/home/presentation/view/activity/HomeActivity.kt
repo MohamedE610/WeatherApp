@@ -7,6 +7,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.core.presentation.extentions.addFragment
 import com.example.weatherapp.service.UpdateForecastService
 import com.example.weatherapp.home.presentation.view.fragment.HomeFragment
+import com.example.weatherapp.weatherdetails.presentation.view.fragment.WeatherDetailsFragment
 import dagger.android.support.DaggerAppCompatActivity
 
 class HomeActivity : DaggerAppCompatActivity() {

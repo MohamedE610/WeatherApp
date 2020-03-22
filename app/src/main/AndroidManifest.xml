@@ -17,18 +17,28 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <service
-            android:name="com.example.weatherapp.service.UpdateForecastService"
-            android:enabled="true"
-            android:exported="false"></service>
-
-        <activity android:name=".weatherdetails.presentation.view.activity.WeatherDetailsActivity" />
-        <activity android:name=".home.presentation.view.activity.HomeActivity">
+        <activity
+            android:name=".loading.presentation.view.activity.LoadingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <service
+            android:name=".service.UpdateForecastService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity android:name=".weatherdetails.presentation.view.activity.WeatherDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.presentation.view.activity.HomeActivity" />
+        </activity>
+        <activity android:name=".home.presentation.view.activity.HomeActivity">
+
         </activity>
     </application>
 

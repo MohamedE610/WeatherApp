@@ -9,8 +9,8 @@ interface CityWeatherApiService {
 
     @GET("forecast/daily")
     fun getCityWeatherByLatLong(
-        @Query("lat") lat: Long,
-        @Query("lon") lon: Long,
+        @Query("lat") lat: Double,
+        @Query("lon") lon: Double,
         @Query("cnt") numOfDays: Int = 7
     ): Single<CityWeatherResponse>
 

@@ -29,4 +29,7 @@ fun Activity.showToast(msg: String? = "", duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, msg, duration).show()
 }
 
+fun Activity.showToastGeneralError() {
+    showToast("Oops, Something went wrong ")
+}
 

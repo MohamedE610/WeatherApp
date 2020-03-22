@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dim_100dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
     app:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCityBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/holo_red_dark">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/tvCityName"
@@ -18,7 +21,7 @@
             android:layout_marginTop="16dp"
             android:padding="8dp"
             android:textColor="@android:color/white"
-            android:textSize="32sp"
+            android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +35,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="48dp"
             android:textColor="@android:color/white"
-            android:textSize="32sp"
+            android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +47,7 @@
             android:textColor="@android:color/white"
             app:layout_constraintStart_toEndOf="@+id/tvTemperature"
             app:layout_constraintTop_toTopOf="@+id/tvTemperature"
-            tools:text="o" />
+            android:text="o" />
 
         <ImageView
             android:id="@+id/imgRemoveCity"

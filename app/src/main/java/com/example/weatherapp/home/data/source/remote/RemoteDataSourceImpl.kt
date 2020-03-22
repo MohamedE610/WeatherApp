@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(private val apiService: CityWeatherApiService) :
     RemoteDataSource {
-    override fun getCityWeatherByLatLon(lat: Long, lon: Long): Single<CityWeatherResponse> =
+    override fun getCityWeatherByLatLon(lat: Double, lon: Double): Single<CityWeatherResponse> =
         apiService.getCityWeatherByLatLong(lat, lon)
 
     override fun getCityWeatherByCityName(cityName: String): Single<CityWeatherResponse> =

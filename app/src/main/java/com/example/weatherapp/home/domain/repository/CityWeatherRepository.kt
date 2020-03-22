@@ -5,7 +5,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 interface CityWeatherRepository {
-    fun getCityWeatherByLatLong(lat: Long, long: Long): Single<CityWeather>
+    fun getCityWeatherByLatLong(lat: Double, long: Double): Single<CityWeather>
     fun getCityWeatherByCityName(cityName: String): Single<CityWeather>
     fun getAllCitiesWeatherFromDB(): Single<List<CityWeather>>
     fun deleteCityWeather(cityId: String): Completable
